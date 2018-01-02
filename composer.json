@@ -1,0 +1,17 @@
+{
+    "name": "armandojrn/financas",
+    "authors": [
+        {
+            "name": "Armando Junior",
+            "email": "armando.ads@icloud.com"
+        }
+    ],
+    "require": {
+        "robmorgan/phinx": "0.7.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Fin\\": "src/"
+        }
+    }
+}
