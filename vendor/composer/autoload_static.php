@@ -8,6 +8,8 @@ class ComposerStaticInitcdbe4c3c2350caee5dccacdcbaedd319
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+        '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -19,10 +21,15 @@ class ComposerStaticInitcdbe4c3c2350caee5dccacdcbaedd319
         array (
             'Xtreamwayz\\Pimple\\' => 18,
         ),
+        'T' => 
+        array (
+            'Twig\\' => 5,
+        ),
         'S' => 
         array (
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\Yaml\\' => 23,
+            'Symfony\\Component\\Translation\\' => 30,
             'Symfony\\Component\\Filesystem\\' => 29,
             'Symfony\\Component\\Debug\\' => 24,
             'Symfony\\Component\\Console\\' => 26,
@@ -38,11 +45,23 @@ class ComposerStaticInitcdbe4c3c2350caee5dccacdcbaedd319
         'I' => 
         array (
             'Interop\\Container\\' => 18,
+            'Illuminate\\Support\\' => 19,
+            'Illuminate\\Database\\' => 20,
+            'Illuminate\\Contracts\\' => 21,
+            'Illuminate\\Container\\' => 21,
         ),
         'F' => 
         array (
             'Fin\\' => 4,
             'Faker\\' => 6,
+        ),
+        'D' => 
+        array (
+            'Doctrine\\Common\\Inflector\\' => 26,
+        ),
+        'C' => 
+        array (
+            'Carbon\\' => 7,
         ),
         'A' => 
         array (
@@ -59,6 +78,10 @@ class ComposerStaticInitcdbe4c3c2350caee5dccacdcbaedd319
         array (
             0 => __DIR__ . '/..' . '/xtreamwayz/pimple-container-interop/src',
         ),
+        'Twig\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/twig/twig/src',
+        ),
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
@@ -66,6 +89,10 @@ class ComposerStaticInitcdbe4c3c2350caee5dccacdcbaedd319
         'Symfony\\Component\\Yaml\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/yaml',
+        ),
+        'Symfony\\Component\\Translation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/translation',
         ),
         'Symfony\\Component\\Filesystem\\' => 
         array (
@@ -103,6 +130,22 @@ class ComposerStaticInitcdbe4c3c2350caee5dccacdcbaedd319
         array (
             0 => __DIR__ . '/..' . '/container-interop/container-interop/src/Interop/Container',
         ),
+        'Illuminate\\Support\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/support',
+        ),
+        'Illuminate\\Database\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/database',
+        ),
+        'Illuminate\\Contracts\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/contracts',
+        ),
+        'Illuminate\\Container\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/illuminate/container',
+        ),
         'Fin\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
@@ -111,6 +154,14 @@ class ComposerStaticInitcdbe4c3c2350caee5dccacdcbaedd319
         array (
             0 => __DIR__ . '/..' . '/fzaninotto/faker/src/Faker',
         ),
+        'Doctrine\\Common\\Inflector\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Common/Inflector',
+        ),
+        'Carbon\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
+        ),
         'Aura\\Router\\' => 
         array (
             0 => __DIR__ . '/..' . '/aura/router/src',
@@ -118,6 +169,13 @@ class ComposerStaticInitcdbe4c3c2350caee5dccacdcbaedd319
     );
 
     public static $prefixesPsr0 = array (
+        'T' => 
+        array (
+            'Twig_' => 
+            array (
+                0 => __DIR__ . '/..' . '/twig/twig/lib',
+            ),
+        ),
         'P' => 
         array (
             'Pimple' => 

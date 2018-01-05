@@ -13,6 +13,7 @@ use Fin\Plugins\PluginsInterface;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Zend\Diactoros\Response\RedirectResponse;
 use Zend\Diactoros\Response\SapiEmitter;
 
 class Aplication
@@ -53,6 +54,25 @@ class Aplication
         $routing->get($name, $path, $action);
         return $this;
 
+    }
+
+    public function post($path, $action, $name = null):Aplication
+    {
+        $routing = $this->service('routing');
+        $routing->post($name, $path, $action);
+        return $this;
+
+    }
+
+    public function redirect($path){
+        return new RedirectResponse('/category-costs');
+    }
+
+    public function route(string $name, array $params = [])
+    {
+        $generator = $this->service('routing.generator');
+        $path = $generator->generate($name,$params);
+        return $this->redirect($path);
     }
 
     public function start()
