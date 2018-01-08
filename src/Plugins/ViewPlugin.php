@@ -11,6 +11,7 @@ namespace Fin\Plugins;
 
 
 use Fin\ServiceContainerInterface;
+use Fin\view\Twig\TwigGlobals;
 use Fin\view\ViewRenderer;
 use Interop\Container\ContainerInterface;
 
@@ -24,7 +25,10 @@ class ViewPlugin implements PluginsInterface
            $loader = new \Twig_Loader_Filesystem(__DIR__ . '/../../templates');
            $twig = new \Twig_Environment($loader);
 
+           $auth = $container->get('auth');
+
            $generator = $container->get('routing.generator');
+           $twig->addExtension(new TwigGlobals($auth));
            $twig->addFunction(new \Twig_SimpleFunction('route',
                function (string $name, $params =[]) use($generator){
                     return $generator->generate($name,$params);

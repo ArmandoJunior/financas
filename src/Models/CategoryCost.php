@@ -15,7 +15,8 @@ class CategoryCost extends Model
 {
     //Mass Assigment
     protected $fillable = [
-      'name'
+      'name',
+        'user_id'
     ];
 
 }

@@ -19,6 +19,7 @@ use Zend\Diactoros\Response\SapiEmitter;
 class Aplication
 {
     private $serviceContainer;
+    private $befores = [];
 
     /**
      * Aplication constructor.
@@ -34,7 +35,7 @@ class Aplication
         return $this->serviceContainer->get($nome);
     }
 
-    public function addService(string $name, $service):void
+    public function addService(string $name, $service): void
     {
         if (is_callable($service)) {
             $this->serviceContainer->addLazy($name, $service);
@@ -43,12 +44,12 @@ class Aplication
         }
     }
 
-    public function plugin(PluginsInterface $plugin):void
+    public function plugin(PluginsInterface $plugin): void
     {
         $plugin->register($this->serviceContainer);
     }
 
-    public function get($path, $action, $name = null):Aplication
+    public function get($path, $action, $name = null): Aplication
     {
         $routing = $this->service('routing');
         $routing->get($name, $path, $action);
@@ -56,7 +57,7 @@ class Aplication
 
     }
 
-    public function post($path, $action, $name = null):Aplication
+    public function post($path, $action, $name = null): Aplication
     {
         $routing = $this->service('routing');
         $routing->post($name, $path, $action);
@@ -64,18 +65,38 @@ class Aplication
 
     }
 
-    public function redirect($path){
-        return new RedirectResponse('/category-costs');
+    public function redirect($path): ResponseInterface
+    {
+        return new RedirectResponse($path);
     }
 
-    public function route(string $name, array $params = [])
+    public function route(string $name, array $params = []): ResponseInterface
     {
         $generator = $this->service('routing.generator');
         $path = $generator->generate($name,$params);
         return $this->redirect($path);
     }
 
-    public function start()
+    public function before(callable $callback): Aplication
+    {
+        array_push($this->befores, $callback);
+        return $this;
+
+    }
+
+    protected function runBefores(): ?ResponseInterface
+    {
+        foreach ($this->befores as $callback){
+            $result = $callback($this->service(RequestInterface::class));
+            if($result instanceof ResponseInterface){
+                return $result;
+            }
+        }
+
+        return null;
+    }
+
+    public function start(): void
     {
         $route = $this->service('route');
         /** @var ServerRequestInterface $request */
@@ -90,12 +111,18 @@ class Aplication
             $request = $request->withAttribute($key, $value);
         }
 
+        $result = $this->runBefores();
+        if($result){
+            $this->emitResponse($result);
+            return;
+        }
+
         $callable = $route->handler;
         $response = $callable($request);
         $this->emitResponse($response);
     }
 
-    protected function emitResponse(ResponseInterface $response)
+    protected function emitResponse(ResponseInterface $response):void
     {
         $emitter = new SapiEmitter();
         $emitter->emit($response);
